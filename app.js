@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+//instantiates Express and assigns our Application to it, so it can be used later below.
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// routes for the app to use
 app.use('/', routes);
 app.use('/users', users);
 
@@ -56,5 +58,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
+//export the App object
 
 module.exports = app;
