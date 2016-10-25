@@ -26,4 +26,33 @@ router.get('/userlist', function(req, res) {
         });
     });
 });
+
+/* POST request to add a user */
+router.post('/adduser', function(req, res) {
+
+    // Set the DB variable
+    var db = req.db;
+
+    // retrieve the values from the form input.
+    var userName = req.body.name;
+    var userEmail = req.body.email;
+
+    // Set the usercollection
+    var collection = db.get('usercollection');
+
+    // Send to the DB and process and save
+    collection.insert({
+        "name" : userName,
+        "email" : userEmail
+    }, function (err, doc) {
+        if (err) {
+            // If it failed send this error
+            res.send("There was a problem with your request!!");
+        }
+        else {
+            // forward to success page
+            res.redirect("userlist");
+        }
+    });
+});
 module.exports = router;
